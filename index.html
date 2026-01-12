@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gokul | Full Stack Developer & UI/UX Enthusiast</title>
+    <meta name="description"
+        content="Premium Portfolio of Gokul - Full Stack Developer specializing in React, Node.js, and modern web technologies.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+
+    <!-- Custom config for styling -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        dark: {
+                            DEFAULT: '#0a0a0a',
+                            secondary: '#111111',
+                            card: 'rgba(26, 26, 26, 0.8)'
+                        },
+                        accent: {
+                            primary: '#667eea',
+                            secondary: '#764ba2'
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-primary': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                        'gradient-secondary': 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+
+<body
+    class="bg-gray-50 text-gray-900 dark:bg-[#0a0a0a] dark:text-white overflow-x-hidden antialiased selection:bg-accent-primary selection:text-white">
+
+    <!-- Custom Cursor -->
+    <div id="cursor"
+        class="fixed pointer-events-none z-[9999] transition-transform duration-100 ease-out hidden md:block">
+        <div class="cursor-dot w-3 h-3 bg-white rounded-full shadow-[0_0_10px_rgba(255,255,255,0.8)]"></div>
+        <div
+            class="cursor-outline absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 border border-white/50 rounded-full transition-all duration-200">
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto flex justify-between items-center glass-nav p-4 rounded-2xl">
+            <!-- Logo -->
+            <a href="#" class="text-2xl font-bold font-heading tracking-tighter group">
+                <span
+                    class="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 group-hover:from-accent-primary group-hover:to-accent-secondary transition-all duration-300">GOKUL
+                    M<span class="text-accent-primary">.</span></span>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#about"
+                    class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors relative">About</a>
+                <a href="#journey"
+                    class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors relative">Journey</a>
+                <a href="#experience"
+                    class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors relative">Experience</a>
+                <a href="#projects"
+                    class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors relative">Projects</a>
+                <a href="#skills"
+                    class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors relative">Skills</a>
+                <a href="#contact"
+                    class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors relative">Contact</a>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-4">
+                <!-- Theme toggle removed - dark mode only -->
+                <a href="#contact"
+                    class="hidden md:block px-6 py-2.5 rounded-full bg-gradient-primary text-white text-sm font-bold shadow-lg shadow-purple-900/20 hover:shadow-purple-900/40 hover:-translate-y-0.5 transition-all duration-300">
+                    Let's Talk
+                </a>
+                <!-- Mobile Menu Button -->
+                <button id="menu-btn"
+                    class="md:hidden w-10 h-10 flex flex-col justify-center items-center gap-1.5 z-50">
+                    <span class="w-6 h-0.5 bg-white transition-all duration-300 origin-center"></span>
+                    <span class="w-6 h-0.5 bg-white transition-all duration-300 origin-center"></span>
+                    <span class="w-4 h-0.5 bg-white transition-all duration-300 origin-center self-end"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu"
+        class="fixed inset-0 z-40 bg-dark/95 backdrop-blur-xl translate-x-full transition-transform duration-500 flex items-center justify-center">
+        <div class="flex flex-col items-center gap-8 text-2xl font-heading font-bold">
+            <a href="#about"
+                class="mobile-link text-white/50 hover:text-white transition-colors hover:scale-110">About</a>
+            <a href="#journey"
+                class="mobile-link text-white/50 hover:text-white transition-colors hover:scale-110">Journey</a>
+            <a href="#experience"
+                class="mobile-link text-white/50 hover:text-white transition-colors hover:scale-110">Experience</a>
+            <a href="#projects"
+                class="mobile-link text-white/50 hover:text-white transition-colors hover:scale-110">Projects</a>
+            <a href="#skills"
+                class="mobile-link text-white/50 hover:text-white transition-colors hover:scale-110">Skills</a>
+            <a href="#contact"
+                class="mobile-link text-white/50 hover:text-white transition-colors hover:scale-110">Contact</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <!-- Animated Background -->
+        <div class="absolute inset-0 z-0">
+            <div
+                class="absolute top-0 -left-20 w-[500px] h-[500px] bg-purple-600/30 rounded-full mix-blend-screen filter blur-[100px] animate-blob">
+            </div>
+            <div
+                class="absolute top-0 -right-20 w-[500px] h-[500px] bg-blue-600/30 rounded-full mix-blend-screen filter blur-[100px] animate-blob animation-delay-2000">
+            </div>
+            <div
+                class="absolute -bottom-32 left-20 w-[500px] h-[500px] bg-pink-600/30 rounded-full mix-blend-screen filter blur-[100px] animate-blob animation-delay-4000">
+            </div>
+            <div id="particles-js" class="absolute inset-0 opacity-30"></div>
+        </div>
+
+        <div class="container mx-auto px-6 z-10 grid lg:grid-cols-2 gap-12 items-center">
+            <!-- Text Content -->
+            <div data-aos-disabled>
+                <!-- Freelance badge removed -->
+                <h1 class="text-5xl md:text-7xl font-bold font-heading leading-tight mb-6">
+                    I Create <br>
+                    <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 typing-effect">Digital
+                        Experiences</span>
+                </h1>
+                <h2 class="text-2xl md:text-3xl text-gray-400 mb-8 h-10">
+                    I am <span id="typed-output" class="text-white font-semibold"></span>
+                </h2>
+                <p class="text-lg text-gray-400 mb-10 max-w-lg leading-relaxed">
+                    AI & Data Science Student & Aspiring Full-Stack Developer specializing in MERN stack and modern AI
+                    solutions.
+                </p>
+
+                <div class="flex flex-wrap gap-4">
+                    <a href="#projects"
+                        class="group relative px-8 py-4 bg-white text-black font-bold rounded-lg overflow-hidden transition-all hover:scale-105 active:scale-95">
+                        <div
+                            class="absolute inset-0 w-full h-full bg-gradient-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        </div>
+                        <span
+                            class="relative group-hover:text-white transition-colors duration-300 flex items-center gap-2">
+                            View My Work <i
+                                class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </span>
+                    </a>
+                    <a href="resume.pdf" download
+                        class="px-8 py-4 rounded-lg border border-white/20 hover:bg-white/5 transition-all font-medium flex items-center gap-3 group">
+                        <i class="fas fa-download group-hover:-translate-y-1 transition-transform"></i> Download Resume
+                    </a>
+                </div>
+
+                <!-- Social Proof / Links -->
+                <div class="mt-12 flex items-center gap-6 text-gray-400">
+                    <a href="https://github.com/gokulm-dev-official" target="_blank"
+                        class="hover:text-white hover:scale-110 transition-all"><i
+                            class="fab fa-github text-2xl"></i></a>
+                    <a href="https://www.linkedin.com/in/gokul-m-7b881629b/" target="_blank"
+                        class="hover:text-blue-400 hover:scale-110 transition-all"><i
+                            class="fab fa-linkedin text-2xl"></i></a>
+                    <a href="https://www.instagram.com/gokul_mahalingam_3489?igsh=MXE4d3hydXk2aWIycQ==" target="_blank"
+                        class="hover:text-pink-500 hover:scale-110 transition-all"><i
+                            class="fab fa-instagram text-2xl"></i></a>
+                    <a href="mailto:gokulxmg26@gmail.com" class="hover:text-red-400 hover:scale-110 transition-all"><i
+                            class="fas fa-envelope text-2xl"></i></a>
+                    <div class="w-px h-8 bg-gray-700"></div>
+                </div>
+            </div>
+
+            <!-- Hero Visual/3D Element -->
+            <div class="relative hidden lg:block perspective-1000">
+                <!-- Abstract 3D shape or Image placeholder for now -->
+                <div class="hero-visual w-full h-[600px] relative">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-3xl glass-card transform rotate-y-12 rotate-x-6 hover:rotate-y-0 hover:rotate-x-0 transition-all duration-700 shadow-2xl border border-white/10 p-6 flex items-center justify-center group">
+                        <!-- Code Snippet Mockup -->
+                        <div
+                            class="w-full bg-[#1e1e1e] rounded-xl p-6 font-mono text-sm shadow-inner overflow-hidden relative">
+                            <div class="flex gap-2 mb-4">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                            <div class="space-y-2">
+                                <p><span class="text-pink-500">const</span> <span class="text-blue-400">developer</span>
+                                    = {</p>
+                                <p class="pl-4"><span class="text-blue-300">name</span>: <span
+                                        class="text-green-400">'Gokul'</span>,</p>
+                                <p class="pl-4"><span class="text-blue-300">skills</span>: [<span
+                                        class="text-green-400">'React'</span>, <span
+                                        class="text-green-400">'Node.js'</span>, <span
+                                        class="text-green-400">'Design'</span>],</p>
+                                <p class="pl-4"><span class="text-blue-300">hardWorker</span>: <span
+                                        class="text-purple-400">true</span>,</p>
+                                <p class="pl-4"><span class="text-blue-300">problemSolver</span>: <span
+                                        class="text-purple-400">true</span>,</p>
+                                <p class="pl-4"><span class="text-blue-300">hireable</span>: <span
+                                        class="text-purple-400">function</span>() {</p>
+                                <p class="pl-8"><span class="text-pink-500">return</span> <span
+                                        class="text-green-400">"Immediately"</span>;</p>
+                                <p class="pl-4">}</p>
+                                <p>};</p>
+                            </div>
+                            <!-- Floating Elements -->
+                            <div class="absolute -right-10 -top-10 w-32 h-32 bg-purple-500/20 blur-2xl rounded-full">
+                            </div>
+                        </div>
+
+                        <!-- Floating Tech Icons (Parallax) -->
+                        <div
+                            class="absolute -top-10 -right-10 w-20 h-20 bg-[#1a1a1a] rounded-2xl glass-border flex items-center justify-center animate-float shadow-xl">
+                            <i class="fab fa-react text-4xl text-blue-400 animate-spin-slow"></i>
+                        </div>
+                        <div
+                            class="absolute -bottom-5 -left-5 w-16 h-16 bg-[#1a1a1a] rounded-2xl glass-border flex items-center justify-center animate-float animation-delay-2000 shadow-xl">
+                            <i class="fab fa-js text-3xl text-yellow-400"></i>
+                        </div>
+                        <div
+                            class="absolute top-1/2 -right-16 w-14 h-14 bg-[#1a1a1a] rounded-2xl glass-border flex items-center justify-center animate-float animation-delay-4000 shadow-xl">
+                            <i class="fab fa-node text-2xl text-green-500"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <a href="#about"
+            class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50 hover:text-white transition-colors animate-bounce">
+            <div class="w-6 h-10 border-2 border-current rounded-full flex justify-center pt-2">
+                <div class="w-1 h-2 bg-current rounded-full animate-scroll-mouse"></div>
+            </div>
+        </a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <!-- Section Header -->
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold font-heading mb-4"><span
+                        class="bg-clip-text text-transparent bg-gradient-primary">About Me</span></h2>
+                <div class="w-20 h-1 bg-gradient-primary mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-5 gap-12 items-center">
+                <!-- Image / Visual -->
+                <div class="lg:col-span-2 relative group mx-auto" data-aos="fade-right">
+                    <div
+                        class="absolute -inset-4 bg-gradient-primary rounded-2xl blur-lg opacity-30 group-hover:opacity-60 transition duration-500">
+                    </div>
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                        <!-- Professional photo -->
+                        <img src="MG.jpg" alt="Gokul"
+                            class="w-full h-auto object-cover transform group-hover:scale-105 transition duration-500">
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="lg:col-span-3" data-aos="fade-left">
+                    <h3 class="text-2xl font-bold mb-6">Building Digital Products with <span
+                            class="text-accent-primary">Passion</span></h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        I am GOKUL M., a passionate and motivated Software Developer Fresher with a strong foundation in
+                        programming and full-stack application development. I am skilled in Java, Python, C, SQL, and
+                        Dart (Flutter), with hands-on experience in the MERN stack and core web technologies.
+                    </p>
+                    <p class="text-gray-400 leading-relaxed mb-10">
+                        I enjoy building scalable web and mobile applications and solving real-world problems through
+                        clean and efficient code. I am eager to contribute to innovative software solutions while
+                        continuously learning and growing in a dynamic tech environment.
+                    </p>
+
+                    <!-- Skills Tags/Traits -->
+                    <div class="flex flex-wrap gap-3 mb-10">
+                        <span
+                            class="px-4 py-2 rounded-full glass-border bg-white/5 hover:bg-white/10 transition-colors text-sm">🚀
+                            Fast Learner</span>
+                        <span
+                            class="px-4 py-2 rounded-full glass-border bg-white/5 hover:bg-white/10 transition-colors text-sm">💡
+                            Problem Solver</span>
+                        <span
+                            class="px-4 py-2 rounded-full glass-border bg-white/5 hover:bg-white/10 transition-colors text-sm">🎨
+                            UI/UX Enthusiast</span>
+                        <span
+                            class="px-4 py-2 rounded-full glass-border bg-white/5 hover:bg-white/10 transition-colors text-sm">👥
+                            Team Player</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats/Bento Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mt-20" id="stats-section">
+                <!-- Data loaded from dynamic-content.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Journey / Education Section -->
+    <section id="journey" class="py-24 relative">
+        <div class="absolute inset-0 bg-white/5 skew-y-3 transform origin-top-left -z-10 h-full w-full"></div>
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold font-heading mb-4">My Learning <span
+                        class="bg-clip-text text-transparent bg-gradient-secondary">Journey</span></h2>
+                <div class="w-20 h-1 bg-gradient-secondary mx-auto rounded-full"></div>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">From writing my first "Hello World" to building complex
+                    applications.</p>
+            </div>
+
+            <div class="relative max-w-4xl mx-auto">
+                <!-- Vertical Line -->
+                <div
+                    class="absolute left-0 md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-accent-primary to-accent-secondary transform -translate-x-1/2 opacity-20 hidden md:block">
+                </div>
+
+                <!-- Journey Items -->
+                <div class="space-y-12">
+                    <!-- Dynamic Content Loading... -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-24 relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold font-heading mb-4">Work <span
+                        class="bg-clip-text text-transparent bg-gradient-primary">Experience</span></h2>
+                <div class="w-20 h-1 bg-gradient-primary mx-auto rounded-full"></div>
+            </div>
+
+            <div class="max-w-4xl mx-auto space-y-8" id="experience-container">
+                <!-- Data loaded from dynamic-content.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 relative overflow-hidden bg-white/5">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold font-heading mb-4">Featured <span
+                        class="bg-clip-text text-transparent bg-gradient-primary">Projects</span></h2>
+                <div class="w-20 h-1 bg-gradient-primary mx-auto rounded-full mb-8"></div>
+
+                <!-- Filters -->
+                <div class="flex flex-wrap justify-center gap-4 filter-buttons">
+                    <button
+                        class="px-6 py-2 rounded-full glass-border bg-accent-primary text-white transition-all shadow-lg active-filter"
+                        data-filter="all">All</button>
+                    <button class="px-6 py-2 rounded-full glass-border hover:bg-white/10 transition-all"
+                        data-filter="web">Web Apps</button>
+                    <button class="px-6 py-2 rounded-full glass-border hover:bg-white/10 transition-all"
+                        data-filter="mobile">Mobile</button>
+                    <button class="px-6 py-2 rounded-full glass-border hover:bg-white/10 transition-all"
+                        data-filter="design">UI/UX</button>
+                </div>
+            </div>
+
+            <!-- Project Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+                <!-- Data loaded from js/data.js -->
+            </div>
+
+            <div class="text-center mt-16">
+                <a href="#"
+                    class="inline-block px-8 py-3 rounded-full border border-white/20 hover:bg-white/10 transition-all font-medium group">
+                    View All Projects <i
+                        class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-24 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold font-heading mb-4">Technical <span
+                        class="bg-clip-text text-transparent bg-gradient-secondary">Expertise</span></h2>
+                <div class="w-20 h-1 bg-gradient-secondary mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
+                <!-- Data loaded from dynamic-content.js -->
+            </div>
+
+            <!-- Tech Stack Orbit/Grid -->
+            <div class="mt-20 text-center" data-aos="fade-up">
+                <p class="text-gray-400 mb-8">Technologies I love working with</p>
+                <div class="flex flex-wrap justify-center gap-8 opacity-70">
+                    <i
+                        class="fab fa-react text-5xl hover:text-blue-400 transition-colors hover:scale-110 hover:opacity-100 duration-300"></i>
+                    <i
+                        class="fab fa-js text-5xl hover:text-yellow-400 transition-colors hover:scale-110 hover:opacity-100 duration-300"></i>
+                    <i
+                        class="fab fa-html5 text-5xl hover:text-orange-500 transition-colors hover:scale-110 hover:opacity-100 duration-300"></i>
+                    <i
+                        class="fab fa-css3-alt text-5xl hover:text-blue-500 transition-colors hover:scale-110 hover:opacity-100 duration-300"></i>
+                    <i
+                        class="fab fa-node text-5xl hover:text-green-500 transition-colors hover:scale-110 hover:opacity-100 duration-300"></i>
+                    <i
+                        class="fab fa-python text-5xl hover:text-yellow-300 transition-colors hover:scale-110 hover:opacity-100 duration-300"></i>
+                    <i
+                        class="fab fa-git-alt text-5xl hover:text-red-500 transition-colors hover:scale-110 hover:opacity-100 duration-300"></i>
+                    <i
+                        class="fab fa-docker text-5xl hover:text-blue-600 transition-colors hover:scale-110 hover:opacity-100 duration-300"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="py-20 relative bg-white/5">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold font-heading mb-4">Licenses & <span
+                        class="bg-clip-text text-transparent bg-gradient-primary">Certifications</span></h2>
+                <div class="w-20 h-1 bg-gradient-primary mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Loaded from JS -->
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 relative bg-white/5">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/80 z-0"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <!-- Contact Info -->
+                <div data-aos="fade-right">
+                    <h2 class="text-4xl md:text-5xl font-bold font-heading mb-6">Let's Work <br> <span
+                            class="bg-clip-text text-transparent bg-gradient-primary">Together</span></h2>
+                    <p class="text-gray-400 text-lg mb-10 leading-relaxed">
+                        Have a project in mind or just want to say hi? I'm currently open for new opportunities and
+                        collaborations.
+                    </p>
+
+                    <div class="space-y-8">
+                        <div class="flex items-center gap-6 group">
+                            <div
+                                class="w-14 h-14 rounded-full glass-border flex items-center justify-center bg-white/5 group-hover:bg-accent-primary transition-colors duration-300">
+                                <i class="fas fa-envelope text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400 mb-1">Email Me</p>
+                                <a href="mailto:gokulxmg26@gmail.com"
+                                    class="text-xl font-bold hover:text-accent-primary transition-colors">gokulxmg26@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-6 group">
+                            <div
+                                class="w-14 h-14 rounded-full glass-border flex items-center justify-center bg-white/5 group-hover:bg-accent-secondary transition-colors duration-300">
+                                <i class="fas fa-phone text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400 mb-1">Call Me</p>
+                                <a href="tel:+919342099745"
+                                    class="text-xl font-bold hover:text-accent-secondary transition-colors">+91 93420
+                                    99745</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-6 group">
+                            <div
+                                class="w-14 h-14 rounded-full glass-border flex items-center justify-center bg-white/5 group-hover:bg-green-500 transition-colors duration-300">
+                                <i class="fas fa-map-marker-alt text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400 mb-1">Location</p>
+                                <p class="text-xl font-bold">Namakkal, Tamil Nadu</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 flex gap-4">
+                        <a href="https://github.com/gokulm-dev-official" target="_blank"
+                            class="w-12 h-12 rounded-full glass-border flex items-center justify-center hover:bg-white hover:text-black transition-all hover:-translate-y-1"><i
+                                class="fab fa-github text-xl"></i></a>
+                        <a href="https://www.linkedin.com/in/gokul-m-7b881629b/" target="_blank"
+                            class="w-12 h-12 rounded-full glass-border flex items-center justify-center hover:bg-[#0077b5] hover:text-white transition-all hover:-translate-y-1"><i
+                                class="fab fa-linkedin-in text-xl"></i></a>
+                        <a href="mailto:gokulxmg26@gmail.com"
+                            class="w-12 h-12 rounded-full glass-border flex items-center justify-center hover:bg-red-500 hover:text-white transition-all hover:-translate-y-1"><i
+                                class="fas fa-envelope text-xl"></i></a>
+                        <a href="https://www.instagram.com/gokul_mahalingam_3489?igsh=MXE4d3hydXk2aWIycQ=="
+                            target="_blank"
+                            class="w-12 h-12 rounded-full glass-border flex items-center justify-center hover:bg-[#E1306C] hover:text-white transition-all hover:-translate-y-1"><i
+                                class="fab fa-instagram text-xl"></i></a>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div data-aos="fade-left">
+                    <form class="glass-card p-8 md:p-10 rounded-3xl space-y-6 relative overflow-hidden"
+                        id="contact-form">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-accent-primary/20 blur-3xl rounded-full -z-10">
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium text-gray-400 ml-2">Name</label>
+                                <input type="text"
+                                    class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-accent-primary focus:bg-white/10 transition-all font-medium"
+                                    placeholder="">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium text-gray-400 ml-2">Email</label>
+                                <input type="email"
+                                    class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-accent-primary focus:bg-white/10 transition-all font-medium"
+                                    placeholder="">
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-400 ml-2">Subject</label>
+                            <select
+                                class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-accent-primary focus:bg-white/10 transition-all font-medium appearance-none">
+                                <option class="bg-dark text-gray-300">Project Inquiry</option>
+                                <option class="bg-dark text-gray-300">Freelance Opportunity</option>
+                                <option class="bg-dark text-gray-300">Just Saying Hi</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-400 ml-2">Message</label>
+                            <textarea rows="4"
+                                class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-accent-primary focus:bg-white/10 transition-all font-medium resize-none"
+                                placeholder="Tell me about your project..."></textarea>
+                        </div>
+
+                        <button type="submit"
+                            class="w-full py-4 rounded-xl bg-gradient-primary text-white font-bold shadow-lg hover:shadow-purple-500/30 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group">
+                            <span class="relative z-10 flex items-center justify-center gap-2">Send Message <i
+                                    class="fas fa-paper-plane group-hover:translate-x-1 transition-transform"></i></span>
+                            <div
+                                class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            </div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative bg-black pt-20 pb-10 border-t border-white/10 overflow-hidden">
+        <div
+            class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1px bg-gradient-to-r from-transparent via-accent-primary to-transparent opacity-50">
+        </div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid md:grid-cols-4 gap-12 mb-16">
+                <!-- Brand -->
+                <div class="col-span-1 md:col-span-2">
+                    <a href="#" class="text-3xl font-bold font-heading tracking-tighter mb-6 inline-block">
+                        <span class="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">GOKUL M<span
+                                class="text-accent-primary">.</span></span>
+                    </a>
+                    <p class="text-gray-400 mb-8 max-w-sm">
+                        Aspiring Full-Stack Developer & AI Student. Crafting digital experiences that merge data science
+                        with modern web technology.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="https://github.com/gokulm-dev-official" target="_blank"
+                            class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-accent-primary hover:text-white transition-all"><i
+                                class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/gokul-m-7b881629b/" target="_blank"
+                            class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-accent-primary hover:text-white transition-all"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="mailto:gokulxmg26@gmail.com"
+                            class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all"><i
+                                class="fas fa-envelope"></i></a>
+                        <a href="https://www.instagram.com/gokul_mahalingam_3489?igsh=MXE4d3hydXk2aWIycQ=="
+                            target="_blank"
+                            class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#E1306C] hover:text-white transition-all"><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <!-- Links -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Quick Links</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#about"
+                                class="text-gray-400 hover:text-white transition-colors hover:pl-2">About</a></li>
+                        <li><a href="#journey"
+                                class="text-gray-400 hover:text-white transition-colors hover:pl-2">Journey</a></li>
+                        <li><a href="#experience"
+                                class="text-gray-400 hover:text-white transition-colors hover:pl-2">Experience</a>
+                        </li>
+                        <li><a href="#projects"
+                                class="text-gray-400 hover:text-white transition-colors hover:pl-2">Projects</a>
+                        </li>
+                        <li><a href="#contact"
+                                class="text-gray-400 hover:text-white transition-colors hover:pl-2">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Stay Updated</h4>
+                    <p class="text-sm text-gray-400 mb-4">Subscribe to my newsletter for the latest updates.</p>
+                    <form class="flex gap-2">
+                        <input type="email" placeholder="Email"
+                            class="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:border-accent-primary">
+                        <button
+                            class="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center text-white hover:scale-105 transition-transform"><i
+                                class="fas fa-arrow-right"></i></button>
+                    </form>
+                </div>
+            </div>
+
+            <div
+                class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+                <p>&copy; <span id="year">2023</span> Gokul. All rights reserved.</p>
+                <div class="flex items-center gap-2">
+                    <span>Made with <i class="fas fa-heart text-red-500 animate-pulse"></i> GOKUL M</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Certificate Modal -->
+    <div id="certificate-modal"
+        class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/90 backdrop-blur-sm">
+        <div class="relative max-w-4xl w-full max-h-[90vh] animate-fade-in">
+            <!-- Close Button -->
+            <button id="close-modal"
+                class="absolute -top-12 right-0 text-white hover:text-accent-primary transition-colors text-xl">
+                <i class="fas fa-times"></i> Close
+            </button>
+            <!-- Certificate Image -->
+            <img id="modal-image" src="" alt="Certificate"
+                class="w-full h-auto max-h-[85vh] object-contain rounded-lg shadow-2xl">
+            <!-- Certificate Title -->
+            <p id="modal-title" class="text-center text-white mt-4 text-lg font-bold"></p>
+        </div>
+    </div>
+
+    <!-- Back to Top -->
+    <button id="back-to-top"
+        class="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-gradient-primary text-white flex items-center justify-center shadow-lg translate-y-20 opacity-0 transition-all duration-300 z-40 hover:scale-110">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+
+    <!-- Custom Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/dynamic-content.js"></script>
+    <script src="js/cursor.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/projects.js"></script>
+</body>
+
+</html>
