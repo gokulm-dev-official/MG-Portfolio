@@ -1,0 +1,584 @@
+/* Custom CSS */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&display=swap');
+
+:root {
+  --glass-bg: rgba(26, 26, 26, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+  cursor: none; /* Hide default cursor for custom cursor */
+}
+
+@media (max-width: 768px) {
+    html {
+        cursor: auto;
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Glassmorphism Utilities */
+.glass-nav {
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-card {
+  background: rgba(26, 26, 26, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.glass-border {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Animations */
+@keyframes blob {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-spin-slow {
+    animation: spin 10s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.animate-scroll-mouse {
+    animation: scrollMouse 2s cubic-bezier(0.15, 0.41, 0.69, 0.94) infinite;
+}
+
+@keyframes scrollMouse {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(15px); opacity: 0; }
+}
+
+/* Typing Effect Cursor */
+.typed-cursor {
+    color: #667eea;
+    font-size: 1.5rem;
+}
+
+/* Magnet Effect Utility */
+.magnet-target {
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Custom Selection */
+::selection {
+    background: #764ba2;
+    color: white;
+}
+
+/* =============================================== */
+/* COMPREHENSIVE MOBILE RESPONSIVE STYLES */
+/* =============================================== */
+
+/* Base Mobile Optimizations */
+@media (max-width: 768px) {
+    /* Fix horizontal overflow */
+    html, body {
+        overflow-x: hidden;
+        width: 100%;
+        position: relative;
+    }
+
+    .container {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    /* Navigation Mobile Fixes */
+    nav {
+        padding: 0.75rem 1rem !important;
+    }
+
+    .glass-nav {
+        padding: 0.75rem 1rem !important;
+        border-radius: 1rem !important;
+    }
+
+    /* Hero Section Mobile */
+    #hero {
+        padding-top: 5rem;
+        min-height: 100vh;
+    }
+
+    #hero h1 {
+        font-size: 2.25rem !important;
+        line-height: 1.2 !important;
+    }
+
+    #hero h2 {
+        font-size: 1.25rem !important;
+    }
+
+    #hero p {
+        font-size: 1rem !important;
+    }
+
+    /* Button responsiveness */
+    #hero .flex-wrap {
+        flex-direction: column;
+        gap: 1rem !important;
+    }
+
+    #hero .flex-wrap a {
+        width: 100%;
+        text-align: center;
+        padding: 1rem 1.5rem !important;
+        font-size: 0.9rem;
+    }
+
+    /* Social links mobile */
+    #hero .mt-12 {
+        margin-top: 2rem;
+        justify-content: center;
+    }
+
+    /* Hide scroll indicator on mobile for cleaner look */
+    #hero > a.absolute.bottom-10 {
+        display: none;
+    }
+
+    /* About Section Mobile */
+    #about .grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
+
+    #about .lg\:col-span-2,
+    #about .lg\:col-span-3 {
+        grid-column: span 1 !important;
+    }
+
+    #about h3 {
+        font-size: 1.5rem !important;
+    }
+
+    #about p {
+        font-size: 0.95rem !important;
+    }
+
+    /* Skills Tags Mobile */
+    #about .flex-wrap {
+        justify-content: center;
+    }
+
+    #about .flex-wrap span {
+        font-size: 0.8rem !important;
+        padding: 0.5rem 0.75rem !important;
+    }
+
+    /* Stats Grid Mobile */
+    #stats-section {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 1rem !important;
+    }
+
+    #stats-section .glass-card {
+        padding: 1rem !important;
+    }
+
+    #stats-section .text-4xl {
+        font-size: 1.5rem !important;
+    }
+
+    #stats-section .text-3xl {
+        font-size: 1.75rem !important;
+    }
+
+    #stats-section .text-sm {
+        font-size: 0.7rem !important;
+    }
+
+    /* Journey Section Mobile */
+    #journey .grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    #journey .md\:text-right,
+    #journey .md\:text-left {
+        text-align: left !important;
+    }
+
+    #journey .glass-card {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding: 1.25rem !important;
+    }
+
+    #journey h3 {
+        font-size: 1.25rem !important;
+    }
+
+    #journey span.inline-block {
+        font-size: 0.85rem !important;
+    }
+
+    /* Hide the timeline line on mobile */
+    #journey .absolute.left-0.md\:left-1\/2 {
+        display: none !important;
+    }
+
+    /* Experience Section Mobile */
+    #experience .glass-card {
+        padding: 1.5rem !important;
+    }
+
+    #experience .flex-col.md\:flex-row {
+        flex-direction: column !important;
+    }
+
+    #experience h3 {
+        font-size: 1.25rem !important;
+    }
+
+    #experience .grid.md\:grid-cols-2 {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Projects Section Mobile */
+    #projects .grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    #projects .lg\:col-span-2 {
+        grid-column: span 1 !important;
+    }
+
+    #projects .glass-card {
+        margin: 0 !important;
+    }
+
+    #projects .glass-card img {
+        height: 250px !important;
+    }
+
+    #projects h3 {
+        font-size: 1.25rem !important;
+    }
+
+    #projects p {
+        font-size: 0.9rem !important;
+    }
+
+    /* Filter buttons mobile */
+    #projects .filter-buttons {
+        flex-wrap: wrap !important;
+        gap: 0.5rem !important;
+    }
+
+    #projects .filter-buttons button {
+        padding: 0.5rem 1rem !important;
+        font-size: 0.85rem !important;
+    }
+
+    /* Skills Section Mobile */
+    #skills .grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    #skills .glass-card {
+        padding: 1.25rem !important;
+    }
+
+    #skills .flex.items-center.gap-4 {
+        gap: 0.75rem !important;
+    }
+
+    #skills .w-12.h-12 {
+        width: 2.5rem !important;
+        height: 2.5rem !important;
+    }
+
+    #skills h3 {
+        font-size: 1rem !important;
+    }
+
+    #skills .flex-wrap span {
+        font-size: 0.8rem !important;
+        padding: 0.4rem 0.6rem !important;
+    }
+
+    /* Tech icons row mobile */
+    #skills .flex.flex-wrap.justify-center.gap-8 {
+        gap: 1.5rem !important;
+    }
+
+    #skills .flex.flex-wrap.justify-center.gap-8 i {
+        font-size: 2rem !important;
+    }
+
+    /* Certifications Section Mobile */
+    #certifications .grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    #certifications .h-48 {
+        height: 180px !important;
+    }
+
+    #certifications h4 {
+        font-size: 1rem !important;
+    }
+
+    /* Contact Section Mobile */
+    #contact .grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
+
+    #contact h2 {
+        font-size: 2rem !important;
+    }
+
+    #contact .space-y-8 {
+        gap: 1.5rem !important;
+    }
+
+    #contact .flex.items-center.gap-6 {
+        gap: 1rem !important;
+    }
+
+    #contact .w-14.h-14 {
+        width: 3rem !important;
+        height: 3rem !important;
+    }
+
+    #contact .text-xl.font-bold {
+        font-size: 1rem !important;
+    }
+
+    /* Contact form mobile */
+    #contact form {
+        padding: 1.5rem !important;
+    }
+
+    #contact .grid.md\:grid-cols-2 {
+        grid-template-columns: 1fr !important;
+    }
+
+    #contact .mt-12.flex.gap-4 {
+        justify-content: center;
+    }
+
+    #contact .w-12.h-12 {
+        width: 2.75rem !important;
+        height: 2.75rem !important;
+    }
+
+    /* Footer Mobile */
+    footer .grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+        text-align: center;
+    }
+
+    footer .col-span-1.md\:col-span-2 {
+        grid-column: span 1 !important;
+    }
+
+    footer .flex.gap-4 {
+        justify-content: center;
+    }
+
+    footer .text-3xl {
+        font-size: 1.75rem !important;
+    }
+
+    footer p {
+        font-size: 0.9rem !important;
+    }
+
+    footer ul {
+        text-align: center;
+    }
+
+    footer form {
+        flex-direction: column;
+        gap: 0.75rem !important;
+    }
+
+    footer form input {
+        width: 100% !important;
+    }
+
+    footer .border-t .flex-col.md\:flex-row {
+        text-align: center;
+        gap: 1rem !important;
+    }
+
+    /* Certificate Modal Mobile */
+    #certificate-modal .max-w-4xl {
+        max-width: 95% !important;
+        padding: 1rem !important;
+    }
+
+    #certificate-modal img {
+        max-height: 70vh !important;
+    }
+
+    /* Back to Top Button Mobile */
+    #back-to-top {
+        width: 2.75rem !important;
+        height: 2.75rem !important;
+        right: 1rem !important;
+        bottom: 1rem !important;
+    }
+
+    /* Section headings mobile */
+    section h2 {
+        font-size: 1.75rem !important;
+    }
+
+    section .w-20.h-1 {
+        width: 3rem !important;
+    }
+
+    /* Section padding mobile */
+    section {
+        padding-top: 4rem !important;
+        padding-bottom: 4rem !important;
+    }
+
+    /* Glass cards hover - disable translate on mobile for better touch interaction */
+    .glass-card:hover {
+        transform: translateY(0) !important;
+    }
+
+    /* Background blobs - smaller on mobile */
+    .animate-blob {
+        width: 200px !important;
+        height: 200px !important;
+    }
+}
+
+/* Extra small screens (< 375px) */
+@media (max-width: 374px) {
+    #hero h1 {
+        font-size: 1.75rem !important;
+    }
+
+    #hero h2 {
+        font-size: 1rem !important;
+    }
+
+    #stats-section {
+        grid-template-columns: 1fr !important;
+    }
+
+    section h2 {
+        font-size: 1.5rem !important;
+    }
+}
+
+/* Tablet (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    #hero h1 {
+        font-size: 3.5rem !important;
+    }
+
+    #hero .grid {
+        gap: 2rem !important;
+    }
+
+    #skills .grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    #certifications .grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    #projects .grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    /* Keep the first project full width on tablet */
+    #projects .lg\:col-span-2:first-child {
+        grid-column: span 2 !important;
+    }
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Touch-friendly sizes for interactive elements */
+@media (pointer: coarse) {
+    button, 
+    a, 
+    .glass-card {
+        min-height: 44px;
+    }
+
+    input, 
+    textarea, 
+    select {
+        font-size: 16px !important; /* Prevents zoom on iOS */
+    }
+}
+
+/* Fix for iOS Safari viewport */
+@supports (-webkit-touch-callout: none) {
+    .min-h-screen {
+        min-height: -webkit-fill-available;
+    }
+}
