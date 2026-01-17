@@ -50,7 +50,16 @@ const portfolioData = {
             description: "AI platform for automated dataset analysis and insight generation. Performs real-time data summarization, visualization, and PDF report generation using OpenAI API.",
             tech: ["Python", "FastAPI", "Pandas", "Plotly", "TailwindCSS", "OpenAI API"],
             color: "indigo",
-            link: "https://github.com/gokulm-dev-official"
+            link: "https://advanced-data-vision-max.vercel.app/"
+        },
+        {
+            title: "Hire Ai",
+            category: "web",
+            image: "assets/images/project5.png",
+            description: "Advanced AI recruitment hub featuring automated candidate screening, ATS optimization, and intelligent RAG-powered resume analysis.",
+            tech: ["React", "Express.js", "Gemini AI", "MongoDB", "Tailwind CSS"],
+            color: "violet",
+            link: "https://hire-ai-intelligence-hub.vercel.app/"
         },
         {
             title: "License Plate Detector",
@@ -195,7 +204,7 @@ const portfolioData = {
     stats: [
         {
             label: "Projects Built",
-            value: 4,
+            value: 5,
             icon: "fa-project-diagram",
             color: "text-accent-primary",
             delay: 0
