@@ -38,8 +38,8 @@ const portfolioData = {
             title: "AI-Powered Lung Disease Detection Platform",
             category: "web",
             image: "assets/images/project1.png",
-            description: "A MERN stack platform for automated Chest X-ray analysis. Integrated a TensorFlow deep learning model for instant classification of COVID-19, Pneumonia, and Tuberculosis.",
-            tech: ["MongoDB", "Express.js", "React", "Node.js", "TensorFlow.js", "Tailwind CSS"],
+            description: "Developed a scalable web architecture for automated Chest X-ray analysis and patient diagnosis. Integrated a TensorFlow deep learning model for classification of COVID-19, Pneumonia, and Tuberculosis.",
+            tech: ["MongoDB", "Express.js", "React", "Node.js", "TensorFlow.js", "Tailwind CSS", "Framer Motion"],
             color: "blue",
             link: "https://intelligent-lung-disease-diagnosis.vercel.app/"
         },
@@ -47,7 +47,7 @@ const portfolioData = {
             title: "DataVision-AI",
             category: "web",
             image: "assets/images/project2.png",
-            description: "AI platform for automated dataset analysis and insight generation. Performs real-time data summarization, visualization, and PDF report generation using OpenAI API.",
+            description: "AI platform for automated dataset analysis and insight generation. Performs real-time summarization, visualization, and PDF report generation without manual intervention.",
             tech: ["Python", "FastAPI", "Pandas", "Plotly", "TailwindCSS", "OpenAI API"],
             color: "indigo",
             link: "https://advanced-data-vision-max.vercel.app/"
@@ -65,7 +65,7 @@ const portfolioData = {
             title: "License Plate Detector",
             category: "web",
             image: "assets/images/project3.png",
-            description: "Real-time vehicle license plate recognition system using OpenCV for object detection and Tesseract OCR for accurate text extraction from live camera feeds.",
+            description: "Real-time vehicle license plate recognition system capable of detecting and extracting plate numbers from live camera feeds using OpenCV and Tesseract OCR.",
             tech: ["Python", "OpenCV", "Tesseract OCR"],
             color: "pink",
             link: "https://github.com/gokulm-dev-official"
@@ -74,7 +74,7 @@ const portfolioData = {
             title: "Rido App",
             category: "mobile",
             image: "assets/images/project4.png",
-            description: "3rd Prize Winner at Payoda Hackathon. A ride-sharing safety application with real-time tracking, SOS emergency features, and dual login modules.",
+            description: "3rd Prize Winner at Payoda Hackathon. A ride-sharing safety application with real-time tracking, SOS emergency features, and dual login modules for secure travel.",
             tech: ["Flutter", "Java", "Spring Boot", "Google Maps API"],
             color: "teal",
             link: "https://github.com/gokulm-dev-official"
