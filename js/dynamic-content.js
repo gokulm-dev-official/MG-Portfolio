@@ -145,7 +145,6 @@ function renderProjects() {
         `;
     }).join('');
 }
-
 function renderCertifications() {
     const container = document.querySelector('#certifications .grid');
     if (!container) return;
@@ -163,7 +162,7 @@ function renderCertifications() {
                 <!-- Badge -->
                 <div class="absolute top-4 left-4">
                     <div class="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-lg flex items-center justify-center shadow-lg">
-                        <i class="fab ${cert.icon} text-xl ${cert.color}"></i>
+                        <i class="${cert.icon} text-xl ${cert.color}"></i>
                     </div>
                 </div>
             </div>

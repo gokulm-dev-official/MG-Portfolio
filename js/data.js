@@ -92,16 +92,40 @@ const portfolioData = {
                 "Demonstrated sincerity and proficiency throughout the internship program.",
                 "Worked on real-world web application architectures."
             ],
-            icon: "fa-laptop-code",
+            icon: "fas fa-laptop-code",
             color: "text-purple-500"
         }
     ],
     certifications: [
         {
+            title: "Data Visualization",
+            issuer: "TATA",
+            date: "Mar 2026",
+            icon: "fas fa-chart-bar",
+            color: "text-blue-400",
+            image: "assets/certificates/Data Visualization - TATA.jpeg"
+        },
+        {
+            title: "Gemini Certificate",
+            issuer: "Google/Gemini",
+            date: "Feb 2026",
+            icon: "fas fa-brain",
+            color: "text-purple-400",
+            image: "assets/certificates/Gemini Certificate.jpeg"
+        },
+        {
+            title: "Python Basics",
+            issuer: "Infosys",
+            date: "Jan 2026",
+            icon: "fab fa-python",
+            color: "text-yellow-500",
+            image: "assets/certificates/Python Basics - Infosys.jpeg"
+        },
+        {
             title: "Full Stack Web Development",
             issuer: "Accent Techno Soft (ATS)",
             date: "Jan 2026",
-            icon: "fa-award",
+            icon: "fas fa-award",
             color: "text-purple-500",
             image: "assets/certificates/FullStack Intern - ATS.jpg"
         },
@@ -109,7 +133,7 @@ const portfolioData = {
             title: "AWS Certified Generative-AI",
             issuer: "Amazon Web Services",
             date: "Oct 2025",
-            icon: "fa-aws",
+            icon: "fab fa-aws",
             color: "text-orange-500",
             image: "assets/certificates/Generative-AI-AWS_page-0001.jpg"
         },
@@ -117,7 +141,7 @@ const portfolioData = {
             title: "AI & ML - GUVI",
             issuer: "Guvi",
             date: "Dec 2024",
-            icon: "fa-guvi",
+            icon: "fas fa-award",
             color: "text-blue-500",
             image: "assets/certificates/AI&ML - GUVI_page-0001.jpg"
         },
@@ -125,7 +149,7 @@ const portfolioData = {
             title: "Python_Basics - Hackerrank",
             issuer: "Hackerrank",
             date: "Sep 2025",
-            icon: "fa-hackerrank",
+            icon: "fab fa-hackerrank",
             color: "text-blue-600",
             image: "assets/certificates/python_basic certificate (3).jpg"
         },
@@ -133,7 +157,7 @@ const portfolioData = {
             title: "Payoda Hackathon",
             issuer: "Payoda",
             date: "Mar 2025",
-            icon: "fa-payoda",
+            icon: "fas fa-award",
             color: "text-blue-600",
             image: "assets/certificates/PAYODA HACKATHON_page-0001.jpg"
         },
@@ -141,7 +165,7 @@ const portfolioData = {
             title: "MERN STACK - BootCamp",
             issuer: "NoviTech R&D Pvt Ltd",
             date: "Aug 2024",
-            icon: "fa-novitech",
+            icon: "fas fa-award",
             color: "text-blue-600",
             image: "assets/certificates/Mern Stack - NoviTech.jpg"
         },
@@ -149,7 +173,7 @@ const portfolioData = {
             title: "Java_Basics - Hackerrank",
             issuer: "Hackerrank",
             date: "Sep 2025",
-            icon: "fa-hackerrank",
+            icon: "fab fa-hackerrank",
             color: "text-blue-600",
             image: "assets/certificates/java_basic certificate (1).jpg"
         }
