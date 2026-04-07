@@ -111,11 +111,18 @@ function renderJourney() {
     }).join('');
 }
 
-function renderProjects() {
+function renderProjects(showAll = false) {
     const container = document.getElementById('projects-grid');
-    if (!container) return;
+    const showAllBtn = document.getElementById('show-all-projects-btn');
+    const btnContainer = document.getElementById('projects-button-container');
+    
+    if (!container || !portfolioData.projects) return;
 
-    container.innerHTML = portfolioData.projects.map((project, index) => {
+    // Initially show only 4 or all if showAll is true
+    const displayLimit = showAll ? portfolioData.projects.length : 4;
+    const projectsToDisplay = portfolioData.projects.slice(0, displayLimit);
+
+    container.innerHTML = projectsToDisplay.map((project, index) => {
         // Just for layout variety, making 1st and 4th items span 2 cols if on large screen
         const isLarge = index === 0 || index === 3;
         const colClass = isLarge ? 'lg:col-span-2' : '';
@@ -144,12 +151,38 @@ function renderProjects() {
         </a>
         `;
     }).join('');
-}
-function renderCertifications() {
-    const container = document.querySelector('#certifications .grid');
-    if (!container) return;
 
-    container.innerHTML = portfolioData.certifications.map((cert, index) => {
+    // Toggle button text and functionality
+    if (portfolioData.projects.length <= 4) {
+        if (btnContainer) btnContainer.classList.add('hidden');
+    } else {
+        if (btnContainer) btnContainer.classList.remove('hidden');
+        if (showAllBtn) {
+            if (showAll) {
+                showAllBtn.innerHTML = `View Less <i class="fas fa-arrow-up ml-2 group-hover:-translate-y-1 transition-transform"></i>`;
+                showAllBtn.onclick = () => renderProjects(false);
+            } else {
+                showAllBtn.innerHTML = `View All Projects <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>`;
+                showAllBtn.onclick = () => renderProjects(true);
+            }
+        }
+    }
+
+    // AOS refresh
+    setTimeout(() => { if (typeof AOS !== 'undefined') AOS.refresh(); }, 100);
+}
+function renderCertifications(showAll = false) {
+    const container = document.querySelector('#certifications .grid');
+    const showAllBtn = document.getElementById('show-all-certs-btn');
+    const btnContainer = document.getElementById('certs-button-container');
+    
+    if (!container || !portfolioData.certifications) return;
+
+    // Show only 6 initially or all if showAll is true
+    const displayLimit = showAll ? portfolioData.certifications.length : 6;
+    const certsToDisplay = portfolioData.certifications.slice(0, displayLimit);
+
+    container.innerHTML = certsToDisplay.map((cert, index) => {
         return `
         <div class="group glass-card rounded-xl overflow-hidden hover:-translate-y-2 transition-transform duration-300"
             data-aos="fade-up" data-aos-delay="${index * 100}">
@@ -181,6 +214,25 @@ function renderCertifications() {
         </div>
         `;
     }).join('');
+
+    // Toggle button functionality
+    if (portfolioData.certifications.length <= 6) {
+        if (btnContainer) btnContainer.classList.add('hidden');
+    } else {
+        if (btnContainer) btnContainer.classList.remove('hidden');
+        if (showAllBtn) {
+            if (showAll) {
+                showAllBtn.innerHTML = `Show Less <i class="fas fa-minus-circle ml-2 group-hover:-translate-y-1 transition-transform text-accent-primary"></i>`;
+                showAllBtn.onclick = () => renderCertifications(false);
+            } else {
+                showAllBtn.innerHTML = `Show All Certificates <i class="fas fa-plus-circle ml-2 group-hover:scale-110 transition-transform text-accent-primary"></i>`;
+                showAllBtn.onclick = () => renderCertifications(true);
+            }
+        }
+    }
+
+    // AOS refresh
+    setTimeout(() => { if (typeof AOS !== 'undefined') AOS.refresh(); }, 100);
 
     // Add modal functionality
     initCertificateModal();

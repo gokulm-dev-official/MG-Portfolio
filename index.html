@@ -397,12 +397,12 @@
                 <!-- Data loaded from js/data.js -->
             </div>
 
-            <div class="text-center mt-16">
-                <a href="#"
+            <div class="text-center mt-16" id="projects-button-container">
+                <button id="show-all-projects-btn"
                     class="inline-block px-8 py-3 rounded-full border border-white/20 hover:bg-white/10 transition-all font-medium group">
                     View All Projects <i
                         class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
-                </a>
+                </button>
             </div>
         </div>
     </section>
@@ -459,6 +459,14 @@
 
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Loaded from JS -->
+            </div>
+
+            <div class="text-center mt-16" id="certs-button-container">
+                <button id="show-all-certs-btn"
+                    class="inline-block px-8 py-3 rounded-full glass-border bg-white/5 hover:bg-white/10 transition-all font-medium group">
+                    Show All Certificates <i
+                        class="fas fa-plus-circle ml-2 group-hover:scale-110 transition-transform text-accent-primary"></i>
+                </button>
             </div>
         </div>
     </section>
@@ -692,7 +700,7 @@
 
     <!-- Custom Scripts -->
     <script src="js/data.js"></script>
-    <script src="js/dynamic-content.js"></script>
+    <script src="js/dynamic-content.js?v=1.1"></script>
     <script src="js/cursor.js"></script>
     <script src="js/main.js"></script>
     <script src="js/animations.js"></script>
