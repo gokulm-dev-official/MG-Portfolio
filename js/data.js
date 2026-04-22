@@ -109,16 +109,16 @@ const portfolioData = {
             title: "Data Visualization",
             issuer: "TATA",
             date: "Mar 2026",
-            icon: "fas fa-chart-bar",
-            color: "text-blue-400",
+            icon: "fas fa-award",
+            color: "text-blue-500",
             image: "assets/certificates/Data Visualization - TATA.jpeg"
         },
         {
             title: "Gemini Certificate",
             issuer: "Google/Gemini",
             date: "Feb 2026",
-            icon: "fas fa-brain",
-            color: "text-purple-400",
+            icon: "fas fa-sparkles",
+            color: "text-indigo-400",
             image: "assets/certificates/Gemini Certificate.jpeg"
         },
         {
