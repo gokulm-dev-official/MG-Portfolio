@@ -98,6 +98,14 @@ const portfolioData = {
     ],
     certifications: [
         {
+            title: "AWS Certified Cloud Practitioner",
+            issuer: "Amazon Web Services",
+            date: "Apr 2026",
+            icon: "fab fa-aws",
+            color: "text-orange-400",
+            image: "assets/certificates/AWS Certified Cloud Practitioner certificate_page-0001.jpg"
+        },
+        {
             title: "Data Visualization",
             issuer: "TATA",
             date: "Mar 2026",
