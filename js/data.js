@@ -110,6 +110,7 @@ const portfolioData = {
             issuer: "TATA",
             date: "Mar 2026",
             icon: "fas fa-award",
+            logo: "assets/images/logos/tata.png",
             color: "text-blue-500",
             image: "assets/certificates/Data Visualization - TATA.jpeg"
         },
@@ -118,6 +119,7 @@ const portfolioData = {
             issuer: "Google/Gemini",
             date: "Feb 2026",
             icon: "fas fa-sparkles",
+            logo: "assets/images/logos/gemini.png",
             color: "text-indigo-400",
             image: "assets/certificates/Gemini Certificate.jpeg"
         },

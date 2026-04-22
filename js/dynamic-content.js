@@ -194,8 +194,11 @@ function renderCertifications(showAll = false) {
                 <div class="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent"></div>
                 <!-- Badge -->
                 <div class="absolute top-4 left-4">
-                    <div class="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-lg flex items-center justify-center shadow-lg">
-                        <i class="${cert.icon} text-xl ${cert.color}"></i>
+                    <div class="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-lg flex items-center justify-center shadow-lg overflow-hidden p-1.5">
+                        ${cert.logo ? 
+                            `<img src="${cert.logo}" alt="${cert.issuer} Logo" class="w-full h-full object-contain">` :
+                            `<i class="${cert.icon} text-xl ${cert.color}"></i>`
+                        }
                     </div>
                 </div>
             </div>
