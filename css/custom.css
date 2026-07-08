@@ -222,26 +222,17 @@ html {
         padding: 0.5rem 0.75rem !important;
     }
 
-    /* Stats Grid Mobile */
-    #stats-section {
-        grid-template-columns: 1fr 1fr !important;
-        gap: 1rem !important;
+    /* Command Center & Arena Mobile */
+    .command-center {
+        padding: 1.5rem !important;
     }
-
-    #stats-section .glass-card {
-        padding: 1rem !important;
+    
+    .leetcode-arena {
+        padding: 1.5rem !important;
     }
-
-    #stats-section .text-4xl {
-        font-size: 1.5rem !important;
-    }
-
-    #stats-section .text-3xl {
-        font-size: 1.75rem !important;
-    }
-
-    #stats-section .text-sm {
-        font-size: 0.7rem !important;
+    
+    .stat-block .text-5xl {
+        font-size: 2.5rem !important;
     }
 
     /* Journey Section Mobile */
@@ -576,9 +567,117 @@ html {
     }
 }
 
+}
+
 /* Fix for iOS Safari viewport */
 @supports (-webkit-touch-callout: none) {
     .min-h-screen {
         min-height: -webkit-fill-available;
     }
 }
+
+/* Command Center & Arena Styles */
+.command-center {
+    background: #0d1117;
+    border: 1px solid #30363d;
+}
+
+.leetcode-arena {
+    background: #1a1a1a;
+    border: 1px solid #333;
+}
+
+/* Premium Stats Animations */
+.command-center, .leetcode-arena {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+}
+
+.command-center:hover, .leetcode-arena:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(102, 126, 234, 0.2);
+}
+
+.leetcode-arena:hover {
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(255, 161, 22, 0.2);
+}
+
+.lc-heatmap-cell {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    background-color: #2b2b2b;
+    flex-shrink: 0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lc-heatmap-cell:hover {
+    transform: scale(1.4);
+    z-index: 10;
+    box-shadow: 0 0 8px currentColor;
+}
+
+.lc-heatmap-col {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.lc-heatmap-container {
+    display: flex;
+    gap: 3px;
+}
+
+.lc-lvl-1 { background-color: #0e4429; color: #0e4429; }
+.lc-lvl-2 { background-color: #006d32; color: #006d32; }
+.lc-lvl-3 { background-color: #26a641; color: #26a641; }
+.lc-lvl-4 { background-color: #39d353; color: #39d353; box-shadow: 0 0 5px #39d353; }
+
+/* Animated Progress Bars */
+#lc-easy-bar, #lc-medium-bar, #lc-hard-bar {
+    transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 0 10px currentColor;
+}
+
+/* Premium Project Card Animations */
+.project-card {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.6s ease, border-color 0.6s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.project-card:hover {
+    transform: translateY(-12px) rotateX(2deg);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.project-card img {
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.8s ease;
+    filter: brightness(0.85);
+}
+
+.project-card:hover img {
+    transform: scale(1.12);
+    filter: brightness(1.1) saturate(1.2);
+}
+
+.project-tech-tag {
+    transform: translateY(10px);
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.project-card:hover .project-tech-tag {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.card-glow {
+    transition: opacity 0.6s ease;
+    mix-blend-mode: screen;
+}
+
+

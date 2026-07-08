@@ -1,9 +1,11 @@
-const initApp = () => {
+const initApp = async () => {
     renderJourney();
     renderExperience();
     renderProjects();
     renderCertifications();
     renderSkills();
+    
+    await fetchDynamicStats();
     renderStats();
 
     // Re-initialize AOS after dynamic content loading
@@ -18,6 +20,38 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initApp);
 } else {
     initApp();
+}
+
+async function fetchDynamicStats() {
+    let lcSolved = null;
+    let lcCalendar = null;
+    let ghData = null;
+
+    // Fetch LeetCode Solved Stats
+    try {
+        const lcRes = await fetch('https://alfa-leetcode-api.onrender.com/GokulVisionX/solved');
+        if (lcRes.ok) lcSolved = await lcRes.json();
+    } catch (e) {
+        console.error("Error fetching LC solved:", e);
+    }
+    
+    // Fetch LeetCode Calendar Stats
+    try {
+        const lcStreakRes = await fetch('https://alfa-leetcode-api.onrender.com/GokulVisionX/calendar');
+        if (lcStreakRes.ok) lcCalendar = await lcStreakRes.json();
+    } catch (e) {
+        console.error("Error fetching LC calendar:", e);
+    }
+    
+    // Fetch GitHub Stats
+    try {
+        const ghRes = await fetch('https://github-contributions-api.deno.dev/gokulm-dev-official.json');
+        if (ghRes.ok) ghData = await ghRes.json();
+    } catch (e) {
+        console.error("Error fetching GitHub stats:", e);
+    }
+    
+    renderAdvancedStats(ghData, lcSolved, lcCalendar);
 }
 
 function renderExperience() {
@@ -123,32 +157,48 @@ function renderProjects(showAll = false) {
     const projectsToDisplay = portfolioData.projects.slice(0, displayLimit);
 
     container.innerHTML = projectsToDisplay.map((project, index) => {
-        // Just for layout variety, making 1st and 4th items span 2 cols if on large screen
-        const isLarge = index === 0 || index === 3;
-        const colClass = isLarge ? 'lg:col-span-2' : '';
-
         return `
-        <a href="${project.link}" target="_blank" class="group glass-card rounded-2xl overflow-hidden hover:-translate-y-3 transition-transform duration-500 relative ${colClass} block"
-            data-category="${project.category}">
-            <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent opacity-80 z-10"></div>
+        <div class="project-card group relative rounded-2xl overflow-hidden block h-[450px]"
+            data-category="${project.category}" data-aos="fade-up" data-aos-delay="${index * 100}">
             
+            <!-- Background Image -->
             <img src="${project.image}" alt="${project.title}"
-                class="w-full h-96 object-cover transform group-hover:scale-110 transition duration-700"
+                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 onerror="this.onerror=null; this.src='https://placehold.co/1200x600/2a2a2a/ffffff?text=${encodeURIComponent(project.title)}'">
 
-            <div class="absolute bottom-0 left-0 right-0 p-8 z-20 translate-y-4 group-hover:translate-y-0 transition duration-500">
-                <div class="flex gap-2 mb-4 opacity-0 group-hover:opacity-100 transition duration-500 delay-100">
-                    ${project.tech.map(t => `<span class="px-3 py-1 text-xs rounded-full bg-${project.color}-600/80 text-white backdrop-blur-md">${t}</span>`).join('')}
+            <!-- Bottom Gradient (Always visible for title readability) -->
+            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/90 to-transparent pointer-events-none"></div>
+            
+            <!-- Default State (Shows Title at bottom) -->
+            <div class="absolute inset-x-0 bottom-0 p-6 transition-all duration-500 ease-in-out group-hover:opacity-0 group-hover:translate-y-4">
+                <h3 class="text-2xl font-bold font-heading text-white drop-shadow-md">${project.title}</h3>
+            </div>
+
+            <!-- Hover Overlay (Multiple Detailing) -->
+            <div class="absolute inset-0 bg-[#0f1115]/95 backdrop-blur-md p-8 flex flex-col translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] border border-white/10 z-20">
+                
+                <!-- Title -->
+                <h3 class="text-2xl font-bold font-heading text-${project.color}-400 mb-4 transform -translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-100">${project.title}</h3>
+                
+                <!-- Description -->
+                <p class="text-gray-300 text-sm leading-relaxed mb-6 transform -translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-200 line-clamp-5">${project.description}</p>
+                
+                <!-- Tech Stack Tags -->
+                <div class="flex flex-wrap gap-2 mb-8 transform -translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-300">
+                    ${project.tech.map((t) => `<span class="px-2.5 py-1 text-xs font-medium rounded bg-${project.color}-500/10 text-${project.color}-200 border border-${project.color}-500/30 shadow-[0_0_8px_rgba(0,0,0,0.5)]">${t}</span>`).join('')}
                 </div>
-                <h3 class="text-2xl font-bold font-heading mb-2 text-white">${project.title}</h3>
-                <p class="text-gray-300 line-clamp-2 md:line-clamp-none mb-6 max-w-xl">${project.description}</p>
-                <div class="flex gap-4 opacity-0 group-hover:opacity-100 transition duration-500 delay-200">
-                    <span class="px-6 py-2 bg-white text-black rounded-lg font-bold hover:bg-gray-200 transition flex items-center gap-2">
-                        View Project <i class="fas fa-external-link-alt text-xs"></i>
-                    </span>
+                
+                <!-- Action Buttons -->
+                <div class="mt-auto transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-400">
+                    <a href="${project.link}" target="_blank" class="w-full inline-flex items-center justify-center gap-2 py-3 rounded-lg bg-${project.color}-600 hover:bg-${project.color}-500 text-white font-bold tracking-wide transition-colors shadow-lg shadow-${project.color}-500/25">
+                        <i class="fas fa-external-link-alt"></i> View Live Project
+                    </a>
                 </div>
             </div>
-        </a>
+            
+            <!-- External Neon Glow -->
+            <div class="card-glow absolute inset-0 -z-10 bg-${project.color}-500/40 blur-2xl opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none rounded-2xl"></div>
+        </div>
         `;
     }).join('');
 
@@ -335,15 +385,179 @@ function initCertificateModal() {
 }
 
 function renderStats() {
-    const container = document.getElementById('stats-section');
-    if (!container || !portfolioData.stats) return;
+    // Deprecated, removed old stats grid
+}
 
-    container.innerHTML = portfolioData.stats.map(stat => `
-        <div class="glass-card p-6 rounded-2xl text-center group hover:-translate-y-2 transition-transform duration-300"
-            data-aos="fade-up" data-aos-delay="${stat.delay}">
-            <div class="text-4xl ${stat.color} mb-2"><i class="fas ${stat.icon}"></i></div>
-            <div class="text-3xl font-bold font-heading mb-1 counter" data-target="${stat.value}">0</div>
-            <div class="text-sm text-gray-400">${stat.label}</div>
-        </div>
-    `).join('');
+function renderAdvancedStats(ghData, lcSolved, lcCalendar) {
+    // 1. Render GitHub Stats
+    if (ghData) {
+        try {
+            document.getElementById('gh-total-commits').innerText = ghData.totalContributions || 0;
+            
+            // Calculate current and longest streak
+            let currentStreak = 0;
+            let longestStreak = 0;
+            let tempStreak = 0;
+            let timelineData = [];
+            
+            // Flatten contributions (API returns an array of weeks, each week is an array of days)
+            const days = [];
+            if (Array.isArray(ghData.contributions)) {
+                for (const week of ghData.contributions) {
+                    if (Array.isArray(week)) {
+                        for (const day of week) {
+                            days.push(day);
+                        }
+                    }
+                }
+            }
+            
+            for (const day of days) {
+                if (day.contributionCount > 0) {
+                    tempStreak++;
+                    if (tempStreak > longestStreak) longestStreak = tempStreak;
+                } else {
+                    tempStreak = 0;
+                }
+                
+                // Timeline for last 30 days
+                timelineData.push({
+                    x: new Date(day.date).getTime(),
+                    y: day.contributionCount
+                });
+            }
+            
+            // Count backwards from end for current streak
+            for (let i = days.length - 1; i >= 0; i--) {
+                if (days[i].contributionCount > 0) {
+                    currentStreak++;
+                } else {
+                    break;
+                }
+            }
+            
+            document.getElementById('gh-longest-streak').innerText = longestStreak;
+            
+            // Render Streak Radial Chart
+            if (typeof ApexCharts !== 'undefined') {
+                new ApexCharts(document.querySelector("#gh-streak-chart"), {
+                    series: [currentStreak > 0 ? (currentStreak/longestStreak)*100 : 0],
+                    chart: { type: 'radialBar', height: 160, sparkline: { enabled: true } },
+                    plotOptions: {
+                        radialBar: {
+                            hollow: { size: '60%' },
+                            track: { background: 'transparent' },
+                            dataLabels: {
+                                name: { show: false },
+                                value: { fontSize: '24px', fontWeight: 'bold', color: '#fff', formatter: () => currentStreak }
+                            }
+                        }
+                    },
+                    stroke: { lineCap: 'round' },
+                    colors: ['#667eea']
+                }).render();
+
+                // Render Timeline Chart
+                new ApexCharts(document.querySelector("#gh-timeline-chart"), {
+                    series: [{ name: 'Contributions', data: timelineData.slice(-30) }],
+                    chart: { type: 'area', height: 200, toolbar: { show: false }, background: 'transparent' },
+                    colors: ['#764ba2'],
+                    fill: { type: 'gradient', gradient: { shadeIntensity: 1, opacityFrom: 0.7, opacityTo: 0.1, stops: [0, 90, 100] } },
+                    dataLabels: { enabled: false },
+                    stroke: { curve: 'smooth', width: 2 },
+                    xaxis: { type: 'datetime', labels: { style: { colors: '#6b7280' } }, axisBorder: { show: false }, axisTicks: { show: false } },
+                    yaxis: { show: false },
+                    grid: { borderColor: '#ffffff1a', strokeDashArray: 4, yaxis: { lines: { show: true } }, xaxis: { lines: { show: true } } },
+                    theme: { mode: 'dark' }
+                }).render();
+            }
+        } catch (e) {
+            console.error("Error rendering GitHub stats:", e);
+        }
+    }
+
+    // 2. Render LeetCode Stats
+    if (lcSolved) {
+        try {
+            document.getElementById('lc-easy').innerText = lcSolved.easySolved || 0;
+            document.getElementById('lc-medium').innerText = lcSolved.mediumSolved || 0;
+            document.getElementById('lc-hard').innerText = lcSolved.hardSolved || 0;
+            
+            const total = lcSolved.solvedProblem || 0;
+            document.getElementById('lc-easy-bar').style.width = ((lcSolved.easySolved || 0) / 800 * 100) + '%';
+            document.getElementById('lc-medium-bar').style.width = ((lcSolved.mediumSolved || 0) / 1600 * 100) + '%';
+            document.getElementById('lc-hard-bar').style.width = ((lcSolved.hardSolved || 0) / 700 * 100) + '%';
+            
+            // Render Total Radial
+            if (typeof ApexCharts !== 'undefined') {
+                new ApexCharts(document.querySelector("#lc-total-chart"), {
+                    series: [(total / 3000) * 100],
+                    chart: { type: 'radialBar', height: 180, sparkline: { enabled: true } },
+                    plotOptions: {
+                        radialBar: {
+                            hollow: { size: '65%' },
+                            track: { background: '#2a2a2a' },
+                            dataLabels: {
+                                name: { show: false },
+                                value: { fontSize: '28px', fontWeight: 'bold', color: '#fff', formatter: () => total, offsetY: 10 }
+                            }
+                        }
+                    },
+                    stroke: { lineCap: 'round' },
+                    colors: ['#ffa116']
+                }).render();
+            }
+        } catch(e) {
+            console.error("Error rendering LC stats:", e);
+        }
+    }
+
+    if (lcCalendar && lcCalendar.submissionCalendar) {
+        const heatmap = document.getElementById('lc-heatmap');
+        if (heatmap) {
+            const cal = JSON.parse(lcCalendar.submissionCalendar);
+            
+            const getLocalYMD = (date) => {
+                const y = date.getFullYear();
+                const m = String(date.getMonth() + 1).padStart(2, '0');
+                const dStr = String(date.getDate()).padStart(2, '0');
+                return `${y}-${m}-${dStr}`;
+            };
+
+            const normalizedCal = {};
+            for (const [ts, count] of Object.entries(cal)) {
+                normalizedCal[getLocalYMD(new Date(parseInt(ts) * 1000))] = count;
+            }
+            
+            // Generate last 52 weeks (approx 364 days)
+            const weeks = 52;
+            let currentDay = new Date();
+            currentDay.setHours(0,0,0,0);
+            
+            const startDate = new Date(currentDay);
+            startDate.setDate(startDate.getDate() - (weeks * 7) + 1);
+            
+            let html = '';
+            for (let w = 0; w < weeks; w++) {
+                html += '<div class="lc-heatmap-col">';
+                for (let d = 0; d < 7; d++) {
+                    const cellDate = new Date(startDate);
+                    cellDate.setDate(cellDate.getDate() + (w * 7) + d);
+                    const dateStr = getLocalYMD(cellDate);
+                    
+                    let levelClass = '';
+                    if (normalizedCal[dateStr]) {
+                        const count = normalizedCal[dateStr];
+                        if (count === 1) levelClass = 'lc-lvl-1';
+                        else if (count === 2) levelClass = 'lc-lvl-2';
+                        else if (count === 3) levelClass = 'lc-lvl-3';
+                        else levelClass = 'lc-lvl-4';
+                    }
+                    html += `<div class="lc-heatmap-cell ${levelClass}" title="${cellDate.toDateString()} - ${normalizedCal[dateStr] || 0} submissions"></div>`;
+                }
+                html += '</div>';
+            }
+            heatmap.innerHTML = html;
+        }
+    }
 }

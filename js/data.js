@@ -35,11 +35,29 @@ const portfolioData = {
     ],
     projects: [
         {
-            title: "AI-Powered Lung Disease Detection Platform",
+            title: "Smart Ambulance & Hospital Assistance System",
+            category: "web",
+            image: "assets/images/project6.png",
+            description: "Built an emergency response platform for real-time ambulance requests with live tracking and route navigation via OpenRouteService API. Designed separate modules for patients, drivers, and hospitals with real-time status updates and nearby hospital suggestions.",
+            tech: ["React.js", "Spring Boot", "MongoDB"],
+            color: "emerald",
+            link: "https://github.com/gokulm-dev-official"
+        },
+        {
+            title: "Humanexa — Blood & Helper Donation Platform",
+            category: "web",
+            image: "assets/images/project7.png",
+            description: "Built a platform connecting blood donors and volunteers with people seeking emergency assistance, with search by blood group and location. Implemented secure authentication and responsive dashboards for managing donation requests.",
+            tech: ["MongoDB", "Express.js", "React", "Node.js"],
+            color: "rose",
+            link: "https://github.com/gokulm-dev-official"
+        },
+        {
+            title: "AI-Based Lung Disease Detection System",
             category: "web",
             image: "assets/images/project1.png",
-            description: "Developed a scalable web architecture for automated Chest X-ray analysis and patient diagnosis. Integrated a TensorFlow deep learning model for classification of COVID-19, Pneumonia, and Tuberculosis.",
-            tech: ["MongoDB", "Express.js", "React", "Node.js", "TensorFlow.js", "Tailwind CSS", "Framer Motion"],
+            description: "Developed a desktop app using a trained CNN model to classify chest X-rays into multiple lung disease categories. Generated PDF diagnostic reports with patient history management and report-sharing features.",
+            tech: ["Python", "TensorFlow", "CNN", "React", "Node.js"],
             color: "blue",
             link: "https://intelligent-lung-disease-diagnosis.vercel.app/"
         },
@@ -48,27 +66,18 @@ const portfolioData = {
             category: "web",
             image: "assets/images/project2.png",
             description: "AI platform for automated dataset analysis and insight generation. Performs real-time summarization, visualization, and PDF report generation without manual intervention.",
-            tech: ["Python", "FastAPI", "Pandas", "Plotly", "TailwindCSS", "OpenAI API"],
+            tech: ["Python", "FastAPI", "Pandas", "Plotly", "OpenAI API"],
             color: "indigo",
             link: "https://advanced-data-vision-max.vercel.app/"
         },
         {
-            title: "Hire Ai",
+            title: "Hire AI",
             category: "web",
             image: "assets/images/project5.png",
             description: "Advanced AI recruitment hub featuring automated candidate screening, ATS optimization, and intelligent RAG-powered resume analysis.",
-            tech: ["React", "Express.js", "Gemini AI", "MongoDB", "Tailwind CSS"],
+            tech: ["React", "Express.js", "Gemini AI", "MongoDB"],
             color: "violet",
             link: "https://hire-ai-intelligence-hub.vercel.app/"
-        },
-        {
-            title: "License Plate Detector",
-            category: "web",
-            image: "assets/images/project3.png",
-            description: "Real-time vehicle license plate recognition system capable of detecting and extracting plate numbers from live camera feeds using OpenCV and Tesseract OCR.",
-            tech: ["Python", "OpenCV", "Tesseract OCR"],
-            color: "pink",
-            link: "https://github.com/gokulm-dev-official"
         },
         {
             title: "Rido App",
@@ -190,49 +199,34 @@ const portfolioData = {
     ],
     skills: [
         {
-            category: "Programming Languages",
-            items: ["Java", "Python", "C", "Dart (Flutter)", "JavaScript", "SQL"],
+            category: "Languages",
+            items: ["Java", "Python", "JavaScript"],
             icon: "Code"
         },
         {
-            category: "Web Technologies (MERN)",
-            items: ["HTML", "CSS", "JavaScript", "React.js", "Node.js", "Express.js", "Tailwind CSS"],
+            category: "Frontend",
+            items: ["React.js", "HTML5", "CSS3", "Tailwind CSS"],
             icon: "Layout"
         },
         {
-            category: "Database Management",
-            items: ["MySQL", "MongoDB"],
+            category: "Backend",
+            items: ["Spring Boot", "REST APIs", "Node.js", "Express.js"],
+            icon: "Server"
+        },
+        {
+            category: "Databases",
+            items: ["MySQL", "MongoDB", "Redis"],
             icon: "Database"
         },
         {
-            category: "Mobile App Development",
-            items: ["Flutter", "Dart"],
-            icon: "Smartphone"
-        },
-        {
-            category: "Data Visualization & BI",
-            items: ["Power BI", "Tableau", "Plotly", "Recharts"],
-            icon: "BarChart3"
-        },
-        {
-            category: "AI & Machine Learning",
-            items: ["TensorFlow.js", "OpenCV", "Tesseract OCR", "Pandas"],
-            icon: "Brain"
-        },
-        {
-            category: "Other Skills",
-            items: ["REST API Integration", "Git & GitHub", "Version Control", "FastAPI", "Spring Boot"],
+            category: "Tools",
+            items: ["Git", "GitHub", "Docker", "Linux (Basics)", "Postman"],
             icon: "GitBranch"
         },
         {
-            category: "Operating Systems",
-            items: ["Windows", "Linux", "Ubuntu", "Command Line", "Shell Scripting"],
-            icon: "Desktop"
-        },
-        {
-            category: "Soft Skills",
-            items: ["Problem-Solving", "Critical Thinking", "Time Management", "Leadership"],
-            icon: "Users"
+            category: "Core Concepts",
+            items: ["Object Oriented Programming", "Database Management Systems"],
+            icon: "Brain"
         }
     ],
     stats: [
@@ -251,11 +245,18 @@ const portfolioData = {
             delay: 100
         },
         {
-            label: "LeetCode Submissions",
+            label: "LeetCode Solved",
             value: 11,
-            icon: "fa-code-branch",
+            icon: "fa-code",
             color: "text-yellow-400",
             delay: 200
+        },
+        {
+            label: "LeetCode Streak",
+            value: 1,
+            icon: "fa-fire",
+            color: "text-orange-500",
+            delay: 300
         }
     ]
 };
