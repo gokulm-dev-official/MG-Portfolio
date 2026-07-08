@@ -50,7 +50,7 @@ const portfolioData = {
             description: "Built a platform connecting blood donors and volunteers with people seeking emergency assistance, with search by blood group and location. Implemented secure authentication and responsive dashboards for managing donation requests.",
             tech: ["MongoDB", "Express.js", "React", "Node.js"],
             color: "rose",
-            link: "https://github.com/gokulm-dev-official"
+            link: "http://65.2.9.159/"
         },
         {
             title: "AI-Based Lung Disease Detection System",
