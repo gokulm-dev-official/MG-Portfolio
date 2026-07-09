@@ -400,19 +400,24 @@ function renderAdvancedStats(ghData, lcSolved, lcCalendar) {
             let tempStreak = 0;
             let timelineData = [];
             
-            // Flatten contributions (API returns an array of weeks, each week is an array of days)
-            const days = [];
+            // Flatten contributions and filter out future days
+            const pastDays = [];
+            const now = new Date();
+            const todayStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+            
             if (Array.isArray(ghData.contributions)) {
                 for (const week of ghData.contributions) {
                     if (Array.isArray(week)) {
                         for (const day of week) {
-                            days.push(day);
+                            if (day.date <= todayStr) {
+                                pastDays.push(day);
+                            }
                         }
                     }
                 }
             }
             
-            for (const day of days) {
+            for (const day of pastDays) {
                 if (day.contributionCount > 0) {
                     tempStreak++;
                     if (tempStreak > longestStreak) longestStreak = tempStreak;
@@ -428,8 +433,15 @@ function renderAdvancedStats(ghData, lcSolved, lcCalendar) {
             }
             
             // Count backwards from end for current streak
-            for (let i = days.length - 1; i >= 0; i--) {
-                if (days[i].contributionCount > 0) {
+            let streakIndex = pastDays.length - 1;
+            
+            // GitHub streak grace period: if today is 0, we can still have a streak from yesterday
+            if (streakIndex >= 0 && pastDays[streakIndex].contributionCount === 0) {
+                streakIndex--;
+            }
+            
+            for (; streakIndex >= 0; streakIndex--) {
+                if (pastDays[streakIndex].contributionCount > 0) {
                     currentStreak++;
                 } else {
                     break;
