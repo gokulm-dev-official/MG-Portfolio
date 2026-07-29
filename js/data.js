@@ -225,7 +225,7 @@ const portfolioData = {
         },
         {
             category: "Core Concepts",
-            items: ["Object Oriented Programming", "Database Management Systems"],
+            items: ["Object Oriented Programming", "Database Management Systems", "DSA in Java"],
             icon: "Brain"
         }
     ],

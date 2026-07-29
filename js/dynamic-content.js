@@ -45,10 +45,27 @@ async function fetchDynamicStats() {
     
     // Fetch GitHub Stats
     try {
-        const ghRes = await fetch('https://github-contributions-api.deno.dev/gokulm-dev-official.json');
-        if (ghRes.ok) ghData = await ghRes.json();
+        const ghRes = await fetch('https://github-contributions-api.jogruber.de/v4/gokulm-dev-official');
+        if (ghRes.ok) {
+            const raw = await ghRes.json();
+            const total = Object.values(raw.total || {}).reduce((a, b) => a + b, 0);
+            const contributions = (raw.contributions || []).map(c => ({
+                date: c.date,
+                contributionCount: c.count
+            }));
+            ghData = { totalContributions: total, contributions };
+        }
     } catch (e) {
-        console.error("Error fetching GitHub stats:", e);
+        console.error("Error fetching GitHub stats from primary API:", e);
+    }
+
+    if (!ghData) {
+        try {
+            const ghRes = await fetch('https://github-contributions-api.deno.dev/gokulm-dev-official.json');
+            if (ghRes.ok) ghData = await ghRes.json();
+        } catch (e) {
+            console.error("Error fetching GitHub stats from fallback API:", e);
+        }
     }
     
     renderAdvancedStats(ghData, lcSolved, lcCalendar);
@@ -406,12 +423,16 @@ function renderAdvancedStats(ghData, lcSolved, lcCalendar) {
             const todayStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
             
             if (Array.isArray(ghData.contributions)) {
-                for (const week of ghData.contributions) {
-                    if (Array.isArray(week)) {
-                        for (const day of week) {
+                for (const item of ghData.contributions) {
+                    if (Array.isArray(item)) {
+                        for (const day of item) {
                             if (day.date <= todayStr) {
                                 pastDays.push(day);
                             }
+                        }
+                    } else if (item && typeof item === 'object') {
+                        if (item.date <= todayStr) {
+                            pastDays.push(item);
                         }
                     }
                 }
