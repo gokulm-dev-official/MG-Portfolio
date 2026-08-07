@@ -680,4 +680,53 @@ html {
     mix-blend-mode: screen;
 }
 
+/* ==========================================
+   Live PDF & Print Landscape Optimization
+   ========================================== */
+@media print {
+    @page {
+        size: A4 landscape;
+        margin: 0;
+    }
 
+    html, body {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        background-color: #0b0f17 !important;
+        color: #ffffff !important;
+    }
+
+    /* Force all animated elements visible in print/PDF */
+    [data-aos] {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+    }
+
+    /* Keep glass cards, glow effects & backgrounds exact */
+    .glass-card, .command-center, .leetcode-arena, .project-card {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    /* Make tech tags fully visible without hover */
+    .project-tech-tag {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    /* Ensure interactive elements and links remain clickable */
+    a, button {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        pointer-events: auto !important;
+    }
+
+    /* Hide unneeded navigation/scrollbar UI in PDF if required */
+    #cursor, #cursor-blur {
+        display: none !important;
+    }
+}
