@@ -25,7 +25,7 @@ async function generateLivePDF() {
     });
 
     const page = await browser.newPage();
-    await page.setViewport({ width: 1920, height: 1080 });
+    await page.setViewport({ width: 1440, height: 900, deviceScaleFactor: 1 });
 
     const filePath = 'file:///' + path.join(__dirname, 'index.html').replace(/\\/g, '/');
     console.log("Navigating to page:", filePath);
@@ -41,21 +41,24 @@ async function generateLivePDF() {
         window.scrollTo(0, document.body.scrollHeight);
     });
 
-    await new Promise(r => setTimeout(r, 1500));
+    await new Promise(r => setTimeout(r, 1000));
 
     await page.evaluate(() => {
         window.scrollTo(0, 0);
+        // Remove heavy canvas element before PDF print to prevent giant rasterization
+        document.querySelectorAll('canvas').forEach(c => c.remove());
+        document.querySelectorAll('#cursor, #cursor-blur').forEach(el => el.remove());
     });
 
-    await new Promise(r => setTimeout(r, 1000));
+    await new Promise(r => setTimeout(r, 500));
 
     // Get total scroll height for 1 single continuous page PDF
     const scrollHeight = await page.evaluate(() => document.body.scrollHeight);
-    console.log(`Generating Single Continuous Page PDF (Width: 1920px, Height: ${scrollHeight}px)...`);
+    console.log(`Generating Single Continuous Page PDF (Width: 1440px, Height: ${scrollHeight}px)...`);
 
     await page.pdf({
         path: outputPath,
-        width: '1920px',
+        width: '1440px',
         height: `${scrollHeight}px`,
         printBackground: true,
         displayHeaderFooter: false,
