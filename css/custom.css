@@ -725,6 +725,19 @@ html {
         pointer-events: auto !important;
     }
 
+    /* Disable heavy filter rasterization for small vector PDF size */
+    * {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    .glass-card, .command-center, .leetcode-arena, .project-card {
+        background: #131b2e !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    }
+
     /* Hide unneeded navigation/scrollbar UI in PDF if required */
     #cursor, #cursor-blur {
         display: none !important;

@@ -17,7 +17,7 @@ async function generateLivePDF() {
     const executablePath = systemChromePaths.find(p => fs.existsSync(p));
     console.log("Using system browser executable:", executablePath);
 
-    console.log("Launching Puppeteer for landscape Live PDF generation...");
+    console.log("Launching Puppeteer for Single-Page Continuous Live PDF...");
     const browser = await puppeteer.launch({
         executablePath: executablePath,
         headless: 'new',
@@ -41,7 +41,7 @@ async function generateLivePDF() {
         window.scrollTo(0, document.body.scrollHeight);
     });
 
-    await new Promise(r => setTimeout(r, 2000));
+    await new Promise(r => setTimeout(r, 1500));
 
     await page.evaluate(() => {
         window.scrollTo(0, 0);
@@ -49,18 +49,21 @@ async function generateLivePDF() {
 
     await new Promise(r => setTimeout(r, 1000));
 
-    console.log("Generating A4 Landscape PDF with print backgrounds and clickable links...");
+    // Get total scroll height for 1 single continuous page PDF
+    const scrollHeight = await page.evaluate(() => document.body.scrollHeight);
+    console.log(`Generating Single Continuous Page PDF (Width: 1920px, Height: ${scrollHeight}px)...`);
+
     await page.pdf({
         path: outputPath,
-        format: 'A4',
-        landscape: true,
+        width: '1920px',
+        height: `${scrollHeight}px`,
         printBackground: true,
         displayHeaderFooter: false,
         margin: { top: '0px', right: '0px', bottom: '0px', left: '0px' }
     });
 
     await browser.close();
-    console.log("SUCCESS: Live PDF created successfully at:", outputPath);
+    console.log("SUCCESS: Single Continuous Page Live PDF generated at:", outputPath);
 }
 
 generateLivePDF().catch(err => {
