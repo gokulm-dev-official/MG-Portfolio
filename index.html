@@ -181,10 +181,11 @@
                         class="px-8 py-4 rounded-lg border border-white/20 hover:bg-white/5 transition-all font-medium flex items-center gap-3 group">
                         <i class="fas fa-download group-hover:-translate-y-1 transition-transform"></i> Download Resume
                     </a>
-                    <a href="LivePDF/GOKUL_M_Portfolio_Live.pdf" download="GOKUL_M_Portfolio_Live.pdf" target="_blank"
-                        class="px-8 py-4 rounded-lg border border-purple-500/30 hover:bg-purple-500/10 transition-all font-medium flex items-center gap-3 group text-purple-300 hover:text-white">
-                        <i class="fas fa-file-pdf group-hover:-translate-y-1 transition-transform text-purple-400"></i> Download Live PDF
-                    </a>
+                    <button onclick="generateLivePDF()" id="live-pdf-btn"
+                        class="px-8 py-4 rounded-lg border border-purple-500/30 hover:bg-purple-500/10 transition-all font-medium flex items-center gap-3 group text-purple-300 hover:text-white cursor-pointer">
+                        <i class="fas fa-file-pdf group-hover:-translate-y-1 transition-transform text-purple-400" id="live-pdf-icon"></i>
+                        <span id="live-pdf-text">Download Live PDF</span>
+                    </button>
 
                 </div>
 
@@ -811,6 +812,10 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
 
+    <!-- Live PDF Generation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
     <!-- Custom Scripts -->
     <script src="js/data.js"></script>
     <script src="js/dynamic-content.js?v=1.1"></script>
@@ -818,6 +823,115 @@
     <script src="js/main.js"></script>
     <script src="js/animations.js"></script>
     <script src="js/projects.js"></script>
+
+    <!-- Live PDF Generation Script -->
+    <script>
+        async function generateLivePDF() {
+            const btn = document.getElementById('live-pdf-btn');
+            const icon = document.getElementById('live-pdf-icon');
+            const text = document.getElementById('live-pdf-text');
+
+            // Show loading state
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
+            icon.className = 'fas fa-spinner fa-spin text-purple-400';
+            text.textContent = 'Capturing Live Portfolio...';
+
+            try {
+                // Save current scroll position
+                const savedScrollY = window.scrollY;
+
+                // Scroll to top for full capture
+                window.scrollTo(0, 0);
+
+                // Force all AOS animations to show
+                document.querySelectorAll('[data-aos]').forEach(el => {
+                    el.classList.add('aos-animate');
+                    el.style.opacity = '1';
+                    el.style.transform = 'none';
+                });
+
+                // Wait for animations to settle
+                await new Promise(r => setTimeout(r, 500));
+
+                text.textContent = 'Rendering Full Page...';
+
+                // Hide cursor elements and floating elements that shouldn't be in PDF
+                const hiddenEls = [];
+                document.querySelectorAll('#cursor, #cursor-blur, #back-to-top, #live-pdf-btn').forEach(el => {
+                    hiddenEls.push({ el, display: el.style.display });
+                    el.style.display = 'none';
+                });
+
+                // Capture the entire page as a single canvas
+                const canvas = await html2canvas(document.body, {
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: true,
+                    backgroundColor: '#0a0a0a',
+                    width: document.body.scrollWidth,
+                    height: document.body.scrollHeight,
+                    windowWidth: document.body.scrollWidth,
+                    windowHeight: document.body.scrollHeight,
+                    scrollX: 0,
+                    scrollY: 0,
+                    logging: false
+                });
+
+                // Restore hidden elements
+                hiddenEls.forEach(({ el, display }) => {
+                    el.style.display = display;
+                });
+
+                text.textContent = 'Generating PDF...';
+
+                // Calculate PDF dimensions (single continuous page)
+                const imgWidth = canvas.width;
+                const imgHeight = canvas.height;
+                const pdfWidth = imgWidth * 0.264583; // px to mm at 96dpi/2(scale)
+                const pdfHeight = imgHeight * 0.264583;
+
+                // Create single-page landscape-oriented PDF
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF({
+                    orientation: pdfWidth > pdfHeight ? 'landscape' : 'portrait',
+                    unit: 'mm',
+                    format: [pdfWidth, pdfHeight]
+                });
+
+                // Add the captured image as a single page
+                const imgData = canvas.toDataURL('image/jpeg', 0.92);
+                pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+
+                // Download
+                pdf.save('GOKUL_M_Portfolio_Live.pdf');
+
+                // Restore scroll position
+                window.scrollTo(0, savedScrollY);
+
+                // Success state
+                icon.className = 'fas fa-check text-green-400';
+                text.textContent = 'PDF Downloaded!';
+                setTimeout(() => {
+                    icon.className = 'fas fa-file-pdf group-hover:-translate-y-1 transition-transform text-purple-400';
+                    text.textContent = 'Download Live PDF';
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
+                }, 3000);
+
+            } catch (err) {
+                console.error('Live PDF generation failed:', err);
+                icon.className = 'fas fa-exclamation-triangle text-red-400';
+                text.textContent = 'Error - Try Again';
+                btn.disabled = false;
+                btn.style.opacity = '1';
+                setTimeout(() => {
+                    icon.className = 'fas fa-file-pdf group-hover:-translate-y-1 transition-transform text-purple-400';
+                    text.textContent = 'Download Live PDF';
+                }, 3000);
+            }
+        }
+    </script>
 </body>
 
 </html>
